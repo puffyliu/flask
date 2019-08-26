@@ -1,0 +1,63 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Grand Coder {% endblock %}
+
+{% block head %}
+    {{super()}}
+    <link rel = "stylesheet" href = "{{ url_for('static', filename='css/base.css') }}">
+
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse navbar-custom" data-spy="affix" data-offset-top="50" role="navigation">
+         <div class="container">
+             <div class="navbar-header">
+                 <button type="button" class="navbar-toggle"
+                  data-toggle="collapse" data-target="#navbar-menu">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                 </button>
+                 <a class="navbar-brand" href="/"> GrandCoder </a>
+             </div>
+             <div class="navbar-collapse collapse" id="navbar-menu">
+
+                 <ul class="nav navbar-nav">
+                    <li><a href="/"><span class="glyphicon glyphicon-home"></span> 首頁 </a></li>
+                    <li><a href="/contact"><span class="glyphicon glyphicon-envelope"></span> 聯絡我們 </a></li>
+                    <li><a href="/index2"><span class="glyphicon glyphicon-home"></span> KKK </a></li>
+                     <li><a href="/index3"><span class="glyphicon glyphicon-home"></span> dashboard </a></li>
+                 </ul>
+
+                 <ul class="nav navbar-nav navbar-right">
+
+                    {% if current_user.is_authenticated %}
+                    <li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> 登出 </a></li>
+                    {% else %}
+                    <li><a href="/auth/login/user"><span class="glyphicon glyphicon-log-in"></span> 登入 </a></li>
+                    <li><a href="/auth/register"><span class="glyphicon glyphicon-user"></span> 註冊 </a></li>
+                    {% endif %}
+
+                </ul>
+             </div>
+         </div>
+    </nav>
+
+
+{% endblock %}
+
+{% block content %}
+
+    <div class = "container">
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}
+
