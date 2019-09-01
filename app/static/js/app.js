@@ -60,7 +60,7 @@ var crosshair = techan.plot.crosshair()
         .yAnnotation(ohlcAnnotation)
 
         .on("move", move);
-var textSvg = d3.select("body").append("svg")
+var textSvg = d3.select("s").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", margin.top + margin.bottom)
         .append("g")
@@ -75,7 +75,7 @@ var svgText = textSvg.append("g")
             .style("text-anchor", "start")
             .text("");
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("s").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")

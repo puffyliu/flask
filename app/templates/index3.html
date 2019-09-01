@@ -1,28 +1,18 @@
- <!-- -&#45;&#45;-->
-<!--layout: examples-->
-<!--title: Dashboard Template-->
-<!--extra_css: "dashboard.css"-->
-<!--extra_js:-->
-   <!-- - "https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"-->
-   <!-- - "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"-->
-   <!-- - "dashboard.js"-->
- <!-- -&#45;&#45;-->
- <!doctype html>
+<!doctype html>
 <html lang="en">
 {% extends "index2.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
   <head>
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Dashboard Template · Bootstrap</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
-
     <!-- Bootstrap core CSS -->
-<link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
     <style>
@@ -148,16 +138,22 @@
         </button>
       </div>
     </div>
-    <!--<p>123</p>-->
-    <!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
+
 {% block chart %}
     <div>
+    <div>
+    <input type="search" placeholder="搜尋台股代碼/名稱"  class="search-input" size="35">
+    <button class="query" onclick="onQuery(), onQuery2()">查詢</button>
+    </div>
+
+    </div>
+    <div style="margin-left: 20px">
       <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
       </head>
       <body>
         <!--<button onclick="javascript:location.href='/'">Back</button>-->
-        <p>個股資訊： 亞泥</p>
+        <p class="info">個股資訊：</p>
         <p>K線圖</p>
         <p>時間：2018/11/07 ~ 2019/01/30</p>
         <p>深藍線: 5MA</p>
@@ -167,21 +163,23 @@
       <script src="https://d3js.org/d3.v4.min.js"></script>
       <script src="{{ url_for('static', filename='js/techanjs.js') }}"></script>
       <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/test.js') }}"></script>
       </body>
     </div>
+    {% endblock %}
     </main>
   </div>
 </div>
-    {% endblock %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 {% block history %}
+<s></s>
 <div>
-  <h2>個股名ex.台積電 歷史行情</h2>
+  <h2 class="history" style="margin-left: 10px" onchange="onQuery2()">個股名ex.台積電 歷史行情</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -191,172 +189,25 @@
               <th>最高</th>
               <th>最低</th>
               <th>收盤</th>
-              <th>漲跌</th>
-              <th>漲%</th>
+              <!--<th>漲跌</th>-->
+              <!--<th>漲%</th>-->
               <th>成交量</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>amet</td>
-              <td>consectetur</td>
-              <td>adipiscing</td>
-              <td>elit</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>Integer</td>
-              <td>nec</td>
-              <td>odio</td>
-              <td>Praesent</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>libero</td>
-              <td>Sed</td>
-              <td>cursus</td>
-              <td>ante</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>dapibus</td>
-              <td>diam</td>
-              <td>Sed</td>
-              <td>nisi</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>Nulla</td>
-              <td>quis</td>
-              <td>sem</td>
-              <td>at</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>nibh</td>
-              <td>elementum</td>
-              <td>imperdiet</td>
-              <td>Duis</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>sagittis</td>
-              <td>ipsum</td>
-              <td>Praesent</td>
-              <td>mauris</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>Fusce</td>
-              <td>nec</td>
-              <td>tellus</td>
-              <td>sed</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>augue</td>
-              <td>semper</td>
-              <td>porta</td>
-              <td>Mauris</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>massa</td>
-              <td>Vestibulum</td>
-              <td>lacinia</td>
-              <td>arcu</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>eget</td>
-              <td>nulla</td>
-              <td>Class</td>
-              <td>aptent</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>taciti</td>
-              <td>sociosqu</td>
-              <td>ad</td>
-              <td>litora</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>torquent</td>
-              <td>per</td>
-              <td>conubia</td>
-              <td>nostra</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,014</td>
-              <td>per</td>
-              <td>inceptos</td>
-              <td>himenaeos</td>
-              <td>Curabitur</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>sodales</td>
-              <td>ligula</td>
-              <td>in</td>
-              <td>libero</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+          <meta charset="UTF-8">
+      {% for stock_li in stock_list %}
+        <tr>
+            <td>{{ stock_li['t_date'] }}</td>
+            <td>{{ stock_li['p_open'] }}</td>
+            <td>{{ stock_li['p_high'] }}</td>
+            <td>{{ stock_li['p_low'] }}</td>
+            <td>{{ stock_li['p_close'] }}</td>
+            <!--<td>{{ stock_li.p_close }}</td>-->
+            <!--<td>{{ stock_li.volume }}</td>-->
+            <td>{{ stock_li['volume'] }}</td>
+        </tr>
+      {% endfor %}
           </tbody>
         </table>
       </div>

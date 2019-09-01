@@ -32,7 +32,7 @@ def login_user():
         # user沒查到或者密碼部正確
         flash(u'不存在的帳號名稱或密碼不正確')
     # 沒成功回去login.html
-    return render_template('auth/login_test.html', form=form)
+    return render_template('auth/login.html', form=form)
 
 
 @auth.route('/logout')
@@ -49,22 +49,19 @@ def register():
     # 執行form裡面這個函式
     if form.validate_on_submit():
         # 加入資料庫
+        print("1")
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data)
+        print(2)
         db.session.add(user)
+        print(3)
         db.session.commit()
+        print(4)
         # 導回去叫他登入
         return redirect(url_for('auth.login_user'))
     # 如果validate不通過, 才會再次register
-    return render_template('auth/register_test.html', form=form)
-
-@auth.route('/index/', methods=['GET', 'POST'])
-def test():
-    return render_template('index.html')
-
-
-
+    return render_template('auth/register.html', form=form)
 
 
 

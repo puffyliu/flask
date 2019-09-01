@@ -1248,6 +1248,7 @@ label {
 
 .form-control {
   height: calc(2.4rem + 2px);
+  width: 400px;
   padding: 0.45rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;

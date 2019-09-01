@@ -3,7 +3,7 @@
 
 <html>
     <head>
-        <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap2.css') }}">-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap.min2.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/fontastic.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/font-awesome.min.css') }}">
@@ -25,42 +25,30 @@
             <h2 class="h5">劉某</h2><span>Web Developer</span>
           </div>
           <!-- Small Brand information, appears on minimized sidebar-->
-          <div class="sidenav-header-logo"><a href="/" class="brand-small text-center"> <strong>B</strong><strong class="text-primary">D</strong></a></div>
+          <div class="sidenav-header-logo"><a href="/" class="brand-small text-center"> <strong>高</strong><strong class="text-primary">雄</strong></a></div>
         </div>
         <!-- Sidebar Navigation Menus-->
         <div class="main-menu">
           <h5 class="sidenav-heading">Main</h5>
           <ul id="side-main-menu" class="side-menu list-unstyled">
-            <li><a href="/index2"> <i class="icon-home"></i>Home                             </a></li>
-            <li><a href="forms.html"> <i class="icon-form"></i>Forms                             </a></li>
-            <li><a href="/index3"> <i class="fa fa-bar-chart"></i>Charts                             </a></li>
-            <li><a href="tables.html"> <i class="icon-grid"></i>Tables                             </a></li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
-              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-              </ul>
-            </li>
-            <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page                             </a></li>
-            <li>
-                <a href="#"> <i class="icon-mail"></i>
-                    Demo
-                <!--<div class="badge badge-warning">6 New</div>-->
-                </a>
-            </li>
+            <li><a href="/index2"> <i class="icon-home"></i>首頁                             </a></li>
+            <li><a href="/query1"> <i class="fa fa-bar-chart"></i>個股資訊                             </a></li>
+            <li><a href="/recommend"> <i class="icon-flask"></i>個股推薦                             </a></li>
+            <li><a href="/keep"> <i class="icon-screen"></i>即時追蹤                             </a></li>
+            <li><a href="/analysis"> <i class="icon-picture"></i>新聞情感分析                             </a></li>
+            <li><a href="/mail"> <i class="icon-mail"></i>聯絡我們                             </a></li>
           </ul>
         </div>
-        <div class="admin-menu">
-          <h5 class="sidenav-heading">Second menu</h5>
-          <ul id="side-admin-menu" class="side-menu list-unstyled">
-            <li> <a href="#"> <i class="icon-screen"> </i>Demo</a></li>
-            <li> <a href="#"> <i class="icon-flask"> </i>Demo
-                <div class="badge badge-info">Special</div></a></li>
-            <li> <a href=""> <i class="icon-flask"> </i>Demo</a></li>
-            <li> <a href=""> <i class="icon-picture"> </i>Demo</a></li>
-          </ul>
-        </div>
+        <!--<div class="admin-menu">-->
+          <!--<h5 class="sidenav-heading">Second menu</h5>-->
+          <!--<ul id="side-admin-menu" class="side-menu list-unstyled">-->
+            <!--<li> <a href="#"> <i class="icon-screen"> </i>Demo</a></li>-->
+            <!--<li> <a href="#"> <i class="icon-flask"> </i>Demo-->
+                <!--<div class="badge badge-info">Special</div></a></li>-->
+            <!--<li> <a href=""> <i class="icon-flask"> </i>Demo</a></li>-->
+            <!--<li> <a href=""> <i class="icon-picture"> </i>Demo</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
       </div>
     </nav>
     <div class="page">
@@ -79,12 +67,12 @@
                   </a>
               </div>
 
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="flex-direction: row;">
 
                     {% if current_user.is_authenticated %}
                     <li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> 登出 </a></li>
                     {% else %}
-                    <li><a href="/auth/login/user" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-log-in"></span> 登入 </a></li>
+                    <li style="margin-right: 30px;"><a href="/auth/login/user" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-log-in"></span> 登入 </a></li>
                     <li><a href="/auth/register" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-user"></span> 註冊 </a></li>
                     {% endif %}
 
@@ -93,24 +81,21 @@
           </div>
         </nav>
       </header>
-
 {% block chart %}
+        <div>
         <h1><font size="7">待辦事項:</font></h1>
         <ul><font size="5">1.想一下首頁要放什麼</font></ul>
-        <ul><font size="5">2.調整登入&註冊位置跟顏色</font></ul>
-        <ul><font size="5">3.登入&註冊動作尚未完成</font></ul>
-        <ul><font size="5">4.index3繼承的位置不知道怎麼搞QQ</font></ul>
-
-
-    </div>
+        <ul><font size="5">2.調整登入&註冊顏色</font></ul>
+        <ul><font size="5">3.登入&註冊動作尚未完成(要用雙重繼承)</font></ul>
+        <ul><font size="5">4.歷史資料顯示失敗(這個在問一下YEE峰)</font></ul>
+        <ul><font size="5"></font></ul>
+        </div>
 {% endblock %}
-
 {% block history %}
 {% endblock %}
+    </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="{{ url_for('static', filename='js/techanjs.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
-    <!-- JavaScript files-->
     <script src="{{ url_for('static', filename='vendor/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/popper.min.js') }}"> </script>
     <script src="{{ url_for('static', filename='vendor/bootstrap.min.js') }}"></script>

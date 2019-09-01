@@ -2,6 +2,12 @@
   <dictionary name="TibaMe-Big Data">
     <words>
       <w>endblock</w>
+      <w>imgid</w>
+      <w>mycursor</w>
+      <w>myresult</w>
+      <w>parsererror</w>
+      <w>stocklisted</w>
+      <w>thumbernail</w>
     </words>
   </dictionary>
 </component>

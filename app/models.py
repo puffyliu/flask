@@ -2,7 +2,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from . import db
 from . import login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from mysql.connector import connection
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -17,6 +17,16 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
     thumbernail = db.Column(db.String(128), default=None, unique=True)
+
+    def insert_data(self, i, e, u, p, c, t):
+        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='member_inf', user='db102stock',
+                                          password='db102stock_pwd')
+        mycursor = conn.cursor()
+        mycursor.execute("Insert into member_inf (id, email, username, password_hash, confirmed, thumbernail) values "
+                         "({}, {}, {}, {}, {}, {}) ".format(i, e, u, p, c, t))
+        print(mycursor)
+        myresult = mycursor.fetchone()
+        conn.close()
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
