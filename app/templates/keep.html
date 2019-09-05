@@ -1,0 +1,19 @@
+{% extends "index2.html" %}
+
+{% block chart %}
+<div>
+        <h1><font size="7">待辦事項:</font></h1>
+        <ul><font size="5">1.如何接redis資料</font></ul>
+        <ul><font size="5">2.設定何種條件下alert</font></ul>
+        <ul><font size="5">3.</font></ul>
+        <ul><font size="5">4.</font></ul>
+        <ul><font size="5">5.</font></ul>
+</div>
+
+<div>
+    <input type="search" placeholder="搜尋台股代碼/名稱"  class="search-input" size="35" style="margin-top:15px">
+    <button class="query" onclick="onKeep()">追蹤</button>
+</div>
+
+<script src="{{ url_for('static', filename='js/test.js') }}"></script>
+{% endblock %}

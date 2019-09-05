@@ -1,0 +1,23 @@
+{% extends "index2.html" %}
+
+{% block chart %}
+<body>
+<div>
+        <h1><font size="7">待辦事項:</font></h1>
+        <ul><font size="5">1.等譽庭把圖片對應的股名告訴我</font></ul>
+        <ul><font size="5">2.</font></ul>
+        <ul><font size="5">3.</font></ul>
+
+        </div>
+
+<div>
+    <input type="search" placeholder="搜尋台股代碼/名稱"  class="search-input" size="35" style="margin-top:15px">
+    <button class="query" onclick="onAnalysis()">查詢</button>
+</div>
+
+
+<img src="" class="img-fluid rounded-circle" id="imgid">
+
+<script src="{{ url_for('static', filename='js/test.js') }}"></script>
+</body>
+{% endblock %}

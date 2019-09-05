@@ -2,8 +2,7 @@ from flask import render_template, session, redirect, url_for, current_app, requ
 from . import main
 from ..models import db
 from mysql.connector import connection
-import csv
-import os
+import redis
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -18,26 +17,12 @@ def createdb():
 def index2():
     return render_template('index2.html')
 
-@main.route('/recommend', methods=['GET', 'POST'])
-def recommend():
-    return render_template('recommend.html')
-
-@main.route('/keep', methods=['GET', 'POST'])
-def keep():
-    return render_template('keep.html')
-
-@main.route('/analysis', methods=['GET', 'POST'])
-def analysis():
-    return render_template('analysis.html')
-
-@main.route('/mail', methods=['GET', 'POST'])
-def mail():
-    return render_template('mail.html')
 
 @main.route('/data.json', methods=['GET', 'POST'])
 def data_json():
     return render_template("data.json")
 
+# 轉換代碼成中文
 @main.route('/query1', methods=['GET', 'POST'])
 def query1():
     result = ""
@@ -65,8 +50,10 @@ def query1():
     else:
         return render_template('index3.html', result=result)
 
+# 查詢下面的表格
 @main.route('/query2', methods=['GET', 'POST'])
 def query2():
+    print(111)
     stock_list = []
     if request.method == 'POST':
         # 因為input可能是中文，所以不能定為數字型態
@@ -94,10 +81,25 @@ def query2():
     else:
         return render_template('index3.html', stock_list=stock_list)
 
+#
 @main.route('/analysis', methods=['GET', 'POST'])
 def analysis():
-    if request.method == 'POST':
-        print(111)
+    return render_template('analysis.html')
 
-    else:
-        return render_template('analysis.html')
+
+@main.route('/recommend', methods=['GET', 'POST'])
+def recommend():
+    return render_template('recommend.html')
+
+@main.route('/keep', methods=['GET', 'POST'])
+def keep():
+    r = redis.Redis(host='10.120.14.128', port=6379, decode_responses=True)
+    test = r.hget('stock', '2317')
+    print(test)
+
+    return render_template('keep.html')
+
+
+@main.route('/mail', methods=['GET', 'POST'])
+def mail():
+    return render_template('mail.html')

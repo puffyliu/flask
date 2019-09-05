@@ -153,13 +153,13 @@
       </head>
       <body>
         <!--<button onclick="javascript:location.href='/'">Back</button>-->
-        <p class="info">個股資訊：</p>
-        <p>K線圖</p>
-        <p>時間：2018/11/07 ~ 2019/01/30</p>
-        <p>深藍線: 5MA</p>
-        <p>淺藍線: 20MA</p>
-        <p>橘線：  60MA</p>
-        <p>灰色Bar: 成交量</p>
+        <p class="info" style="font-size:15px">個股資訊：</p>
+        <p style="font-size:15px">K線圖</p>
+        <p style="font-size:15px">時間：2018/11/07 ~ 2019/01/30</p>
+        <p style="font-size:15px">深藍線: 5MA</p>
+        <p style="font-size:15px">淺藍線: 20MA</p>
+        <p style="font-size:15px">橘線：  60MA</p>
+        <p style="font-size:15px">灰色Bar: 成交量</p>
       <script src="https://d3js.org/d3.v4.min.js"></script>
       <script src="{{ url_for('static', filename='js/techanjs.js') }}"></script>
       <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
@@ -179,7 +179,7 @@
 {% block history %}
 <s></s>
 <div>
-  <h2 class="history" style="margin-left: 10px" onchange="onQuery2()">個股名ex.台積電 歷史行情</h2>
+  <h2 class="history" style="margin:15px 10px 10px 10px" onchange="onQuery2()"> 歷史行情</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
