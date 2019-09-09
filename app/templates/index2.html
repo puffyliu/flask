@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.default.css') }}" id="theme-stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico') }}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+        <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet" type="text/css">-->
     </head>
     <body>
 
@@ -39,16 +41,6 @@
             <li><a href="/mail"> <i class="icon-mail"></i>聯絡我們                             </a></li>
           </ul>
         </div>
-        <!--<div class="admin-menu">-->
-          <!--<h5 class="sidenav-heading">Second menu</h5>-->
-          <!--<ul id="side-admin-menu" class="side-menu list-unstyled">-->
-            <!--<li> <a href="#"> <i class="icon-screen"> </i>Demo</a></li>-->
-            <!--<li> <a href="#"> <i class="icon-flask"> </i>Demo-->
-                <!--<div class="badge badge-info">Special</div></a></li>-->
-            <!--<li> <a href=""> <i class="icon-flask"> </i>Demo</a></li>-->
-            <!--<li> <a href=""> <i class="icon-picture"> </i>Demo</a></li>-->
-          <!--</ul>-->
-        <!--</div>-->
       </div>
     </nav>
     <div class="page">
@@ -87,7 +79,7 @@
         <ul><font size="5">1.想一下首頁要放什麼</font></ul>
         <ul><font size="5">2.調整登入&註冊顏色</font></ul>
         <ul><font size="5">3.登入&註冊動作尚未完成(要用雙重繼承)</font></ul>
-        <ul><font size="5">4.歷史資料顯示失敗(這個在問一下YEE峰)</font></ul>
+        <ul><font size="5">4.</font></ul>
         <ul><font size="5"></font></ul>
         </div>
 {% endblock %}
@@ -98,13 +90,52 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/popper.min.js') }}"> </script>
-    <script src="{{ url_for('static', filename='vendor/bootstrap.min.js') }}"></script>
+    <!--<script src="{{ url_for('static', filename='vendor/bootstrap.min.js') }}"></script>-->
     <script src="{{ url_for('static', filename='js/grasp_mobile_progress_circle-1.0.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/jquery.cookie.js') }}"> </script>
     <script src="{{ url_for('static', filename='vendor/Chart.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/jquery.validate.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/charts-home.js') }}"></script>
+    <!--&lt;!&ndash;<script src="https://code.jquery.com/jquery-3.3.1.js"></script>&ndash;&gt; 這個會擋住front.js-->
+    <script src="{{ url_for('static', filename='js/datatables.min.js') }}"></script>
+    <script >
+        $(document).ready(function() {
+            redisdata();
+            function redisdata() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/keep',
+                    contentType: 'application/json; charset=UTF-8',
+                    success: function(data){
+                        var redisJson = JSON.parse(data);
+                            var tr = '';
+                            for(var p in redisJson){
+                                <!--console.log(redisJson[p]['key']);-->
+                                redis_list = redisJson[p]['key'].split(" ")
+                                redis_list2 = redis_list[2].split("，")
+                                tr += '<tr role="row" class="odd">';
+                                tr += '<td class="sorting_1">' + redis_list[0] + '</td>';
+                                tr += '<td>' + redis_list[1] + '</td>';
+                                tr += '<td>' + redis_list2[0].slice(4, -1) +  '</td>';
+                                tr += '<td>' + redis_list2[1].slice(5) + '</td>';
+                                tr += '<td>' + redis_list2[2].slice(4, -1) + '</td>';
+                                tr += '<td>' + '<button type="button" data-toggle="modal" data-target="#myModal">加入追蹤</button>' + '</td>';
+                                tr += '</tr>';
+                            }
+                            $("#Andytable").append(tr);
+                            $('#AndyisMeOk').DataTable();
+                    },
+                    error: function(xhr, type) {
+                        console.log(xhr.responseText);
+                        console.log(type);
+                    }
+                });
+            }
+        <!--var t2 = window.setInterval("redisdata()",5000);-->
+        } );
+
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Main File-->
     <script src="{{ url_for('static', filename='js/front.js') }}"></script>

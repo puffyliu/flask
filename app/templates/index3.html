@@ -194,20 +194,8 @@
               <th>成交量</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="gvFitting">
           <meta charset="UTF-8">
-      {% for stock_li in stock_list %}
-        <tr>
-            <td>{{ stock_li['t_date'] }}</td>
-            <td>{{ stock_li['p_open'] }}</td>
-            <td>{{ stock_li['p_high'] }}</td>
-            <td>{{ stock_li['p_low'] }}</td>
-            <td>{{ stock_li['p_close'] }}</td>
-            <!--<td>{{ stock_li.p_close }}</td>-->
-            <!--<td>{{ stock_li.volume }}</td>-->
-            <td>{{ stock_li['volume'] }}</td>
-        </tr>
-      {% endfor %}
           </tbody>
         </table>
       </div>

@@ -1,19 +1,60 @@
+<!doctype html>
+<html lang="en">
 {% extends "index2.html" %}
+<body>
 
 {% block chart %}
-<div>
-        <h1><font size="7">待辦事項:</font></h1>
-        <ul><font size="5">1.如何接redis資料</font></ul>
-        <ul><font size="5">2.設定何種條件下alert</font></ul>
-        <ul><font size="5">3.</font></ul>
-        <ul><font size="5">4.</font></ul>
-        <ul><font size="5">5.</font></ul>
-</div>
+<div class="card mb-3" style="margin-top:35px">
+    <div class="card-header" style="height:70px;"><h4 style="line-height:47px">個股現況</h4></div>
+    <div class="card-body">
+    <table id="AndyisMeOk" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th style="width:15%">股名</th>
+                <th style="width:15%">最後更新時間</th>
+                <th style="width:20%">成交價(單位:新台幣)</th>
+                <th style="width:15%">漲(跌)幅</th>
+                <th style="width:20%">累積交易量(單位:張)</th>
+                <th style="width:15%">追蹤設定</th>
+            </tr>
+        </thead>
+        <tbody id="Andytable" style="background-color:gray">
+            <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" class="modal fade text-left show" style="display: none" aria-modal="true">
+                    <div role="document" class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 id="exampleModalLabel" class="modal-title">追蹤設定</h5>
+                          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>自定義提醒的條件</p>
+                          <form style="margin-top:20px">
+                            <div class="form-group">
+                              <input type="radio" name="price" value="up" style="width: 20px;height: 20px; margin-left:5px" /><span style="font-size:15px; margin-left:4px">漲</span>
+                              <input type="radio" name="price" value="down" style="width: 20px;height: 20px; margin-left:15px" /><span style="font-size:15px; margin-left:4px">跌</span>
+                            </div>
+                          <div class="form-group" style="margin-top:30px">
+                              <label>幅度</label>
+                              <div class="input-group" style="width:400px">
+                                <input type="text" placeholder="輸入正負+數字 ex.+5" class="form-control">
+                                <div class="input-group-append"><span class="input-group-text">%</span></div>
+                          </div>
+                        </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" data-dismiss="modal" class="btn btn-secondary">關閉</button>
+                          <button type="button" class="btn btn-primary">新增設定</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </tbody>
+    </table>
+    </div>
 
-<div>
-    <input type="search" placeholder="搜尋台股代碼/名稱"  class="search-input" size="35" style="margin-top:15px">
-    <button class="query" onclick="onKeep()">追蹤</button>
-</div>
+  </div>
 
-<script src="{{ url_for('static', filename='js/test.js') }}"></script>
+</body>
 {% endblock %}
+</html>

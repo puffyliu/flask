@@ -1946,8 +1946,8 @@ STYLE SWITCHER FOR DEMO
 
 .btn-info {
   color: color-yiq(#17a2b8);
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: #736b69;
+  border-color: #736b69;
 }
 
 .btn-info:hover {
@@ -3004,7 +3004,7 @@ a > code {
   margin-left: 1.25rem;
 }
 
-.card-header {
+.card-header2 {
   padding: 1rem 1.25rem;
   background-color: #fff;
   border-bottom: 1px solid #eee;

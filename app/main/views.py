@@ -3,6 +3,7 @@ from . import main
 from ..models import db
 from mysql.connector import connection
 import redis
+import json
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -53,8 +54,8 @@ def query1():
 # 查詢下面的表格
 @main.route('/query2', methods=['GET', 'POST'])
 def query2():
-    print(111)
     stock_list = []
+    stock_json = []
     if request.method == 'POST':
         # 因為input可能是中文，所以不能定為數字型態
         rev = request.get_json()['input']
@@ -62,24 +63,23 @@ def query2():
                                           password='db102stock_pwd')  # docker
         mycursor = conn.cursor()
         if rev.isdigit():
-            mycursor.execute("SELECT t_date, name, code, p_open, p_high, p_low, p_close, volume FROM stock_inf"
+            mycursor.execute("SELECT date_format(t_date, '%Y-%m-%d'), name, code, p_open, p_high, p_low, p_close, volume FROM stock_inf"    # 日期要轉字串不然無法轉json
                                 " where code = {} order by t_date desc limit 15 ".format(rev))
         elif isinstance(rev, str):
-            mycursor.execute("SELECT t_date, name, code, p_open, p_high, p_low, p_close, volume FROM stock_inf"
+            mycursor.execute("SELECT date_format(t_date, '%Y-%m-%d'), name, code, p_open, p_high, p_low, p_close, volume FROM stock_inf"
                              " where name = {} order by t_date desc limit 15 ".format(rev))
-
         myresult = mycursor.fetchall()
         conn.close()
 
         for i in myresult:
             stock_data = {"t_date": i[0], "name": i[1], "code": i[2], "p_open": i[3], "p_high": i[4], "p_low": i[5],
                           "p_close": i[6], "volume": i[7]}
-            # print(stock_data)
             stock_list.append(stock_data)
-        print(tuple(stock_list))
-        return tuple(stock_list)
+        stock_json = json.dumps(stock_list)
+        # print(stock_json)
+        return stock_json
     else:
-        return render_template('index3.html', stock_list=stock_list)
+        return render_template('index3.html', stock_json=stock_json)
 
 #
 @main.route('/analysis', methods=['GET', 'POST'])
@@ -93,11 +93,17 @@ def recommend():
 
 @main.route('/keep', methods=['GET', 'POST'])
 def keep():
-    r = redis.Redis(host='10.120.14.128', port=6379, decode_responses=True)
-    test = r.hget('stock', '2317')
-    print(test)
-
-    return render_template('keep.html')
+    redis_json = []
+    if request.method == 'POST':
+        r = redis.Redis(host='10.120.14.128', port=6379, decode_responses=True)
+        re_stock = r.hgetall('stock')
+        for key in re_stock:
+            redis_list = {"key": (re_stock[key])}
+            redis_json.append(redis_list)
+        redis_json = json.dumps(redis_json)
+        return redis_json
+    else:
+        return render_template('keep.html', redis_json=redis_json)
 
 
 @main.route('/mail', methods=['GET', 'POST'])
