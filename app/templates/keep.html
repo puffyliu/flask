@@ -29,6 +29,7 @@
                         <div class="modal-body">
                           <p>自定義提醒的條件</p>
                           <form style="margin-top:20px">
+                            <div class="instant-name" style="margin-bottom:20px;">股名(這裡到時直接改成股名)</div>
                             <div class="form-group">
                               <input type="radio" name="price" value="up" style="width: 20px;height: 20px; margin-left:5px" /><span style="font-size:15px; margin-left:4px">漲</span>
                               <input type="radio" name="price" value="down" style="width: 20px;height: 20px; margin-left:15px" /><span style="font-size:15px; margin-left:4px">跌</span>
@@ -44,7 +45,8 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" data-dismiss="modal" class="btn btn-secondary">關閉</button>
-                          <button type="button" class="btn btn-primary">新增設定</button>
+                          <button type="button" data-dismiss="modal" class="btn btn-primary" onclick="onSetting()" id="update_setting">新增設定</button>
+                          <button type="button" data-dismiss="modal" class="btn btn-primary" onclick="deSetting()" id="remove_setting">解除設定</button>
                         </div>
                       </div>
                     </div>
@@ -54,7 +56,7 @@
     </div>
 
   </div>
-
+<script src="{{ url_for('static', filename='js/test.js') }}"></script>
 </body>
 {% endblock %}
 </html>

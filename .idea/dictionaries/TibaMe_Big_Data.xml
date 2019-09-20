@@ -2,14 +2,23 @@
   <dictionary name="TibaMe-Big Data">
     <words>
       <w>bgcolor</w>
+      <w>curdate</w>
+      <w>dclass</w>
       <w>endblock</w>
+      <w>fradio</w>
       <w>imgid</w>
+      <w>instantprice</w>
       <w>mycursor</w>
       <w>myresult</w>
       <w>parsererror</w>
+      <w>pred</w>
       <w>redisdata</w>
       <w>stocklisted</w>
+      <w>stockname</w>
+      <w>swiper</w>
+      <w>tbody</w>
       <w>thumbernail</w>
+      <w>updown</w>
     </words>
   </dictionary>
 </component>

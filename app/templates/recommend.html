@@ -1,21 +1,98 @@
 {% extends "index2.html" %}
-
+<body>
 
 {% block chart %}
 <div>
-        <h1><font size="7">待辦事項:</font></h1>
-        <ul><font size="5">1.選完產業後接模型結果</font></ul>
-        <ul><font size="5">2.</font></ul>
-        <ul><font size="5">3.</font></ul>
-        <ul><font size="5">4.</font></ul>
-        <ul><font size="5">5.</font></ul>
+<input type="button" class="buy" data-toggle="modal" data-target="#exampleModalCenter1" onclick="onBuy()" style="background-image:url('{{ url_for('static', filename='image/buy2.jpg') }}');">
+<input type="button" class="sell" data-toggle="modal" data-target="#exampleModalCenter2" onclick="onSell()" style="background-image:url('{{ url_for('static', filename='image/down2.jpg') }}') ;">
 </div>
-<div class="form-group row">
-<div class="col-sm-10 mb-3">
-<select name="account" class="form-control" style="margin-left: 20px">
-  <option>金融業</option>
-  <option>半導體業</option>
-  <option>電信業</option>
-  <option>...</option>
-</select>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle1">個股推薦</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <caption>2019/9/4推薦排行榜</caption>
+        <table class="table" id="tp_buy_1">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">代碼</th>
+              <th scope="col">股名</th>
+              <th scope="col">預測</th>
+              <th scope="col">推薦指數</th>
+            </tr>
+          </thead>
+          <tbody id="todayPredict1">
+          </tbody>
+        </table>
+        <caption>2019/9/5推薦排行榜</caption>
+        <table class="table" id="tp_buy_2">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">代碼</th>
+              <th scope="col">股名</th>
+              <th scope="col">預測</th>
+              <th scope="col">推薦指數</th>
+            </tr>
+          </thead>
+          <tbody id="tomorrowPredict1">
+          </tbody>
+            <caption>*推薦指數為0~10 越大越好</caption>
+        </table>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle2">個股推薦</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <caption>2019/9/4推薦排行榜</caption>
+        <table class="table" id="tp_sell_1">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">代碼</th>
+              <th scope="col">股名</th>
+              <th scope="col">建議</th>
+              <th scope="col">推薦指數</th>
+            </tr>
+          </thead>
+          <tbody id="todayPredict2">
+          </tbody>
+        </table>
+        <caption>2019/9/5推薦排行榜</caption>
+        <table class="table" id="tp_sell_2">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">代碼</th>
+              <th scope="col">股名</th>
+              <th scope="col">建議</th>
+              <th scope="col">推薦指數</th>
+            </tr>
+          </thead>
+          <tbody id="tomorrowPredict2">
+          </tbody>
+            <caption>*推薦指數為0~10 越小越好</caption>
+        </table>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+</body>

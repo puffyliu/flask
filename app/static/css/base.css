@@ -6,3 +6,20 @@
   width: 300px;
   margin: 5px 5px 20px 5px;
 }
+
+.buy {
+    width:764px;
+    height:800px;
+    border-style:none;
+    display:inline;
+    outline-width:0px;
+}
+
+.sell {
+    width:763px;
+    height:800px;
+    border-style:none;
+    display:inline;
+    outline-width:0px;
+    margin: 0px 0px 0px -5px;
+}
