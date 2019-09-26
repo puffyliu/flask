@@ -8,40 +8,29 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap.min2.css') }}">
-    <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/font-awesome.min.css') }}">
-    <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fontastic.css') }}">
-    <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    <!-- jQuery Circle-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/grasp_mobile_progress_circle-1.0.0.min.css') }}">
-    <!-- Custom Scrollbar-->
     <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/jquery.mCustomScrollbar.css') }}">
-    <!-- theme stylesheet-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.default.css') }}" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <!--<link rel="stylesheet" href="css/custom.css">-->
-    <!-- Favicon-->
     <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico') }}">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   </head>
   <body>
     <div class="page login-page">
       <div class="container">
         <div class="form-outer text-center d-flex align-items-center">
-          <div class="form-inner">
-            <div class="logo text-uppercase"><span>成為</span><strong class="text-primary">高雄人</strong></div>
-            <p>三顆大太陽，韓流更在旁。問誰能出線？端看習大皇！</p>
-            <p>港澳拜謁中聯辦，瑜公移山說不丹。賣菜兼賣我台灣，台灣特首屬此韓？</p>
-            <p>三月政壇亂紛紛，四個太陽欲斷魂。轉了再轉白海豚，氣死換柱朱立倫。</p>
-            <form class="text-left form-validate">
+          <div class="form-inner" style="width:600px; padding-right:100px">
+            <div class="logo text-uppercase"><span>成為</span><strong class="text-primary">投資人</strong></div>
+            <!--<p>三顆大太陽，韓流更在旁。問誰能出線？端看習大皇！</p>-->
+            <!--<p>港澳拜謁中聯辦，瑜公移山說不丹。賣菜兼賣我台灣，台灣特首屬此韓？</p>-->
+            <!--<p>三月政壇亂紛紛，四個太陽欲斷魂。轉了再轉白海豚，氣死換柱朱立倫。</p>-->
+            <div class="text-left form-validate">
               {{ wtf.quick_form(form) }}
-            </form><small>已經有帳號了 ? </small><a href="/auth/login/user" class="signup">登入</a>
+            </div><small>已經有帳號了 ? </small><a href="/auth/login/user" class="signup">登入</a>
           </div>
           <div class="copyrights text-center">
             <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>

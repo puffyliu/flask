@@ -49,15 +49,11 @@ def register():
     # 執行form裡面這個函式
     if form.validate_on_submit():
         # 加入資料庫
-        print("1")
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data)
-        print(2)
         db.session.add(user)
-        print(3)
         db.session.commit()
-        print(4)
         # 導回去叫他登入
         return redirect(url_for('auth.login_user'))
     # 如果validate不通過, 才會再次register

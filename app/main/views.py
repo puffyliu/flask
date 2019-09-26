@@ -9,7 +9,7 @@ import json
 @main.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index2.html')
-
+    # return render_template('auth/login_test.html')
 
 @main.route('/createdb', methods=['GET', 'POST'])
 def createdb():
@@ -34,8 +34,8 @@ def query1():
     if request.method == 'POST':
         # 因為input可能是中文，所以不能定為數字型態
         rev = str(request.get_json()['input'])
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor = conn.cursor()
         mycursor.execute(" Select code, name from stocklisted ")
         myresult = mycursor.fetchall()
@@ -64,8 +64,8 @@ def query2():
     if request.method == 'POST':
         # 因為input可能是中文，所以不能定為數字型態
         rev = request.get_json()['input']
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor = conn.cursor()
         if rev.isdigit():
             mycursor.execute(
@@ -104,7 +104,7 @@ def recommend():
 def keep():
     redis_json = []
     if request.method == 'POST':
-        r = redis.Redis(host='10.120.14.128', port=6379, decode_responses=True)
+        r = redis.Redis(host='3.112.55.152', port=6379, decode_responses=True)
         re_stock = r.hgetall('stock')
         for key in re_stock:
             redis_list = {"key": (re_stock[key])}
@@ -122,8 +122,8 @@ def setting():
         fradio = str(request.get_json()['fradio'])
         stockname = str(request.get_json()['stockname'])
         # setting = str(request.get_json()['setting'])
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor = conn.cursor()
         # status = 1 表示已設定 0表示未設定
         mycursor.execute(" select status from instantprice_inf where stockname = '{}' ".format(stockname))
@@ -151,8 +151,8 @@ def de_setting():
         fradio = str(request.get_json()['fradio'])
         stockname = str(request.get_json()['stockname'])
         # setting = str(request.get_json()['setting'])
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor = conn.cursor()
         # status = 1 表示已設定 0表示未設定
         mycursor.execute(" select status from instantprice_inf where stockname = '{}' ".format(stockname))
@@ -177,8 +177,8 @@ def buy():
     recommend_json = ""
     if request.method == 'POST':
         # pred = 0且score越大越好 -> 買進
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor = conn.cursor()
         # 9/3 預測 9/4
         mycursor.execute(" select st.name, f.code, f.pred, f.date, f.score from flask f left join stocklisted st on f.code = st.code where f.pred = 0 and f.date = '2019/9/3' order by score desc limit 5 ")
@@ -188,8 +188,8 @@ def buy():
             recommend_data = {"name": i[0], "code": i[1], "pred": i[2], "date": i[3], "score": i[4]}
             recommend_list.append(recommend_data)
         recommend_list3.append(recommend_list)
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor2 = conn.cursor()
         # 9/4 預測 9/5
         mycursor2.execute(" select st.name, f.code, f.pred, f.date, f.score from flask f left join stocklisted st on f.code = st.code where f.pred = 0 and f.date = '2019/9/4' order by score desc limit 5 ")
@@ -213,8 +213,8 @@ def sell():
     recommend_json = ""
     if request.method == 'POST':
         # pred = 1且score越小越好 -> 賣出
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor = conn.cursor()
         # 9/3 預測 9/4
         mycursor.execute(" select st.name, f.code, f.pred, f.date, f.score from flask f left join stocklisted st on f.code = st.code where f.pred = 1 and f.date = '2019/9/3' order by score asc limit 5 ")
@@ -224,8 +224,8 @@ def sell():
             recommend_data = {"name": i[0], "code": i[1], "pred": i[2], "date": i[3], "score": i[4]}
             recommend_list.append(recommend_data)
         recommend_list3.append(recommend_list)
-        conn = connection.MySQLConnection(host="10.120.14.18", port=3306, database='stock', user='db102stock',
-                                          password='db102stock_pwd')  # docker
+        conn = connection.MySQLConnection(host="3.112.55.152", port=3306, database='stock', user='root',
+                                          password='iii')  # EC2
         mycursor2 = conn.cursor()
         # 9/4 預測 9/5
         mycursor2.execute(" select st.name, f.code, f.pred, f.date, f.score from flask f left join stocklisted st on f.code = st.code where f.pred = 1 and f.date = '2019/9/4' order by score asc limit 5 ")

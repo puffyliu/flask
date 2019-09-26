@@ -114,15 +114,6 @@
         </nav>
       </header>
 {% block chart %}
-        <!--<div>-->
-        <!--<h1><font size="7">待辦事項:</font></h1>-->
-        <!--<ul><font size="5">1.首頁參考MOMO的圖片輪播</font></ul>-->
-        <!--<ul><font size="5">2.調整登入&註冊顏色</font></ul>-->
-        <!--<ul><font size="5">3.登入&註冊動作尚未完成(要用雙重繼承)</font></ul>-->
-        <!--<ul><font size="5">4.</font></ul>-->
-        <!--<ul><font size="5"></font></ul>-->
-        <!--</div>-->
-        <!--<marquee scrollamount="10" onMouseOver="this.stop()" onMouseOut="this.start()"><img src="{{ url_for('static', filename='image/sexy.jpg') }}"><img src="{{ url_for('static', filename='image/sexy.jpg') }}">國際成人展</marquee>-->
         <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide"><img src="{{ url_for('static', filename='image/1.jpg') }}"></div>
@@ -189,6 +180,7 @@
         $(document).ready(function() {
             redisdata();
             function redisdata() {
+            console.log(111);
                 $.ajax({
                     type: 'POST',
                     url: '/keep',
@@ -226,7 +218,7 @@
                     }
                 });
             }
-        <!--var t2 = window.setInterval("redisdata()",5000);-->
+            var t2 = window.setInterval(redisdata,5000);
         } );
 
 <!-- Main File-->
